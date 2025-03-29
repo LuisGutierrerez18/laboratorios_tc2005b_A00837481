@@ -1,0 +1,54 @@
+#header h1{
+   text-align: center;
+   margin: 0;
+}
+#header{
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+}
+h2, h3, h4 {
+    border-bottom: 2px solid rgb(0, 0, 0);
+    padding-bottom: 5px;
+}
+p {
+    background: rgb(204, 195, 184);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+    margin-top: 20px;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    padding-bottom: 5px;
+}
+h4 {
+    margin-top: 30px;
+    font-size: 18px;
+    color: #555;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    padding-bottom: 5px;
+}
+
+h4:hover{
+    color: #ff4500;
+    cursor: pointer;
+}
+h2:hover{
+    color:#ff4500 !important;
+    cursor: pointer;
+}
+h3:hover{
+    color: #ff4500 !important;
+    cursor: pointer;
+}
+
+p:hover {
+    background-color: rgb(184, 175, 164);
+    transition: background-color 0.3s ease;
+}
+
+.Preguntas{
+    background-color: rgb(196, 207, 207);
+    font-weight: bold;
+    color: rgb(79, 79, 42);
+}
