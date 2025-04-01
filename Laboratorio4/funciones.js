@@ -137,7 +137,18 @@ document.getElementById("formEj4").addEventListener("submit", ejercicio4);
 function ejercicio5(event){
     event.preventDefault();
 
-    let input = document.getElementById("numberInput").value;
+    let input = document.getElementById("numberInput").value; 
 
-    let inverse = numberInput.split("").reverse().join("");
+    // Evita ingresar algo que no sea un numero
+    if(isNaN(input)){
+        alert("Por favor, introduce un número válido.");
+        return;
+    }
+
+    let inverse = input.split("").reverse().join("");
+    document.getElementById("resultadosEj5").innerHTML = `
+        <h3 class="verifyResult">Resultado</h3>
+        <h3 class = "respuestas">Número invertido: ${inverse}</h3>
+    `;
 }
+document.getElementById("formEj5").addEventListener("submit", ejercicio5);
