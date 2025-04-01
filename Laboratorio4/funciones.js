@@ -103,9 +103,40 @@ function ejercicio3(event){
 
     document.getElementById("resultadosEj3").innerHTML = `
         <h3 class="verifyResult">Resultados</h3>
-        <p>Números negativos: ${negativo}</p>
-        <p>Números positivos: ${positivo}</p>
-        <p>Ceros: ${cero}</p>
+        <p class = "respuestas">Números negativos: ${negativo}</p>
+        <p class = "respuestas">Números positivos: ${positivo}</p>
+        <p class = "respuestas">Ceros: ${cero}</p>
     `;
 }
 document.getElementById("formEj3").addEventListener("submit", ejercicio3)
+
+function ejercicio4(event){
+    event.preventDefault();
+
+    let input = document.getElementById("matrixInput").value;
+    let matrix = input.split(";").map(row=>row.split(",").map(num=>parseInt(num))); // Convierte la cadena de texto en un arreglo de números
+    if(matrix.some(row=> row.some(isNaN))){
+        alert("Por favor, introduce solo números separados por comas.");
+        return;
+    }
+    let matriz = [];
+    
+    let total = 0;
+    for(let i=0; i<matrix.length; i++){
+        total += matrix[i].length;
+    }
+    let promedio = total/matrix.length;
+    
+    document.getElementById("resultadosEj4").innerHTML = 
+    `<h3 class="verifyResult">Resultados</h3>
+    h3 class = "respuestas">Promedio de las filas: ${promedio}</h3>;`
+}
+document.getElementById("formEj4").addEventListener("submit", ejercicio4);
+
+function ejercicio5(event){
+    event.preventDefault();
+
+    let input = document.getElementById("numberInput").value;
+
+    let inverse = numberInput.split("").reverse().join("");
+}
