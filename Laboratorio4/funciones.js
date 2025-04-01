@@ -73,6 +73,31 @@ function verify(event){
 }
 document.getElementById("formEj2").addEventListener("submit", verify);
 
-function ejercicio3(){
+function ejercicio3(event){
+    event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
 
+    let input = document.getElementById("arrayInput").value;
+
+    let arreglo = input.split(",").map(Number); // Convierte la cadena de texto en un arreglo de números
+
+    let negativo = 0;
+    let positivo = 0;
+    let cero = 0;
+
+    for(let i = 0; i < arreglo.length; i++){
+        if(arreglo[i] < 0){
+            negativo++;
+        }else if(arreglo[i] > 0){
+            positivo++;
+        }else{
+            cero++;
+        }
+    }
+
+    document.getElementById("resultadoEj3").innerHTML = `
+        <h3 class="verifyResult">Resultados</h3>
+        <p>Números negativos: ${negativo}</p>
+        <p>Números positivos: ${positivo}</p>
+        <p>Ceros: ${cero}</p>
+    `;
 }
