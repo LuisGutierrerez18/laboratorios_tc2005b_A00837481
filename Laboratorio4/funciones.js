@@ -1,3 +1,7 @@
+let tiempoInicio; // Variable global para almacenar el tiempo de inicio para encontrar el tiempo de respuesta 
+// Esto nos garantiza que la variable sea utilizada en dos funciones diferentes
+let num1, num2; // Variables globales para almacenar los números aleatorios generados
+
 document.getElementById('formEj1').addEventListener('click', ejercicio1);
 function ejercicio1(event){ //event es el evento que se genera al hacer click en el boton
 
@@ -25,40 +29,50 @@ function ejercicio1(event){ //event es el evento que se genera al hacer click en
                    </tr>`;
     }
     result += "</table>";
+    //No se pudo utilizar document.write porque visual studio lo marcaba como deprecated
     //document.write(result);
     document.getElementById('resultado').innerHTML = result;
 }
 
-document.getElementById('formEj2').addEventListener('click', ejercicio2);
+//document.getElementById('formEj2').addEventListener('click', ejercicio2);
 function ejercicio2(){
     let result = 0;
     // Generar dos numeros random (entre 1 y 100)
-    let num1 = Math.floor(Math.random() * 100) + 1;
-    let num2 = Math.floor(Math.random() * 100) + 1;
+    num1 = Math.floor(Math.random() * 100) + 1;
+    num2 = Math.floor(Math.random() * 100) + 1;
     
-    // Mostrar los numeros en el html
     document.getElementById("Numero1").value = num1;
     document.getElementById("Numero2").value = num2;
 
+    // Mostrar los numeros en el html
+    document.getElementById("respuesta").value="";
+    document.getElementById("resultadoEj2").innerHTML = "";
+    
+    tiempoInicio = new Date(); // Guardar el tiempo de inicio
+}
+
+// Verfica si la respuesta del usuario es correcta ejercicio 2
+function verify(event){
+    event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
+    
     // Guardar el tiempo de respuesta
-    let tiempoInicio = new Date();
-    
-    // Respuesta del usuario
-    let respuesta = parseInt(prompt(`¿Cuánto es ${num1} + ${num2}?`));
-    
+    let respuesta = parseInt(document.getElementById("respuesta").value);
+     
     // Mostrar el tiempo de respuesta en segundos
     let tiempoFinal = new Date();
-    let tiempo = (tiempoFinal - tiempoInicio) / 1000; 
-
-
-    let resultHeader = '<h3>Resultado</h3>';
-
+     
+    let tiempo = ((tiempoFinal - tiempoInicio) / 1000).toFixed(2);
+    let resultHeader = `<h3 class = "verifyResult">Resultado</h3>`;
     if(respuesta === num1 + num2){
-        resultHeader += `<h3>¡Correcto! ${num1} + ${num2} = ${num1 + num2}</h3>`;
+        resultHeader += `<h3 class = "verifyResult">¡Correcto!</h3>`;
+    }else{
+        resultHeader += `<h3 class = "verifyResult">Incorrecto.</h3>`;
     }
-    else{
-        resultHeader += `<h3>Incorrecto.</h3>`;
-    }
-    resultHeader += `<h3>Tu tiempo de respuesta fue ${tiempo}</h3>`;
-    document.getElementById('resultadoEj2').innerHTML = resultHeader;
+    resultHeader += `<h3 class = "verifyResult">Tu tiempo de respuesta fue ${tiempo}</h3>`;
+    document.getElementById("resultadoEj2").innerHTML = resultHeader;
+}
+document.getElementById("formEj2").addEventListener("submit", verify);
+
+function ejercicio3(){
+
 }

@@ -32,12 +32,28 @@
             <label for="Numero1">Numero 1:</label>
             <input type="text" id="Numero1" disabled>
             <label for="Numero2">Numero 2:</label>
-            <input type="text" id="Numero2" disabled> <br></form> <br></br>
-            <button onclick="ejercicio2()">Generar Numeros</button><br></br>
-            
-            <div id="resltadoEj2"></div>
+            <input type="text" id="Numero2" disabled> <br></br>
+            <label for="respuesta">Respuesta:</label>
+            <input type="text" id="respuesta"> <br>
+            <button type="submit">Verificar Respuesta</button>
         </form>
-        
+        <button onclick="ejercicio2()">Generar Numeros</button>
+        <div id="resultadoEj2"></div>
+
+        <script>
+            document.getElementById("formEj2").addEventListener("submit", verify);
+        </script>
+
+        <h4>Ejercicio 3: Función: contador. Parámetros: Un arreglo de números. Regresa: La cantidad de números negativos en el arreglo, la cantidad de 0's, y la cantidad de valores mayores a 0 en el arreglo.</h4>
+        <form id="fomrEj3">
+            <label for="arrayInput">Introduce una serie de numeros separados por coma</label>
+            <input type="text" id="arrayInput">
+            <button onclick="ejercicio3()">Calculo</button>
+        </form>
+        <div id="resultadosEj3"></div>
+        <script>
+            document.getElementById("formEj3").addEventListener("submit", ejercicio3);
+        </script>
     <div id="Preguntas"> 
         <h3>Preguntas</h3>
     </div>
