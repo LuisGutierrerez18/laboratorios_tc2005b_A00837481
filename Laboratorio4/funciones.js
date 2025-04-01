@@ -114,23 +114,24 @@ function ejercicio4(event){
     event.preventDefault();
 
     let input = document.getElementById("matrixInput").value;
-    let matrix = input.split(";").map(row=>row.split(",").map(num=>parseInt(num))); // Convierte la cadena de texto en un arreglo de números
+    let matrix = input.split(";").map(row=>row.split(",").map(num=>parseFloat(num))); // Convierte la cadena de texto en un arreglo de números
     if(matrix.some(row=> row.some(isNaN))){
         alert("Por favor, introduce solo números separados por comas.");
         return;
     }
-    let matriz = [];
     
-    let total = 0;
-    for(let i=0; i<matrix.length; i++){
-        total += matrix[i].length;
-    }
-    let promedio = total/matrix.length;
+    let promedios = matrix.map(row => {
+        let suma = row.reduce((acc, num) => acc + num, 0); // Sumar los elementos de la fila. Acc es el acumulador y num es el número actual. Acc funciona como un contador
+        return suma / row.length; // Calcular el promedio de la fila
+    });
     
     document.getElementById("resultadosEj4").innerHTML = 
     `<h3 class="verifyResult">Resultados</h3>
-    h3 class = "respuestas">Promedio de las filas: ${promedio}</h3>;`
-}
+     <h3 class = "respuestas">Promedio de las filas: </h3>
+     <ul>
+        ${promedios.map((promedio, index) => `<li>Fila ${index + 1}: ${promedio.toFixed(2)}</li>`).join("")} 
+     </ul>
+`;}// to fixed(2) muestra el resultado a dos decimales
 document.getElementById("formEj4").addEventListener("submit", ejercicio4);
 
 function ejercicio5(event){
