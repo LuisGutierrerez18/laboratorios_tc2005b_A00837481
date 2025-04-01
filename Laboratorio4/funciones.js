@@ -73,12 +73,19 @@ function verify(event){
 }
 document.getElementById("formEj2").addEventListener("submit", verify);
 
+//document.getElementById("formEj3").addEventListener("submit", ejercicio3)
 function ejercicio3(event){
     event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
 
     let input = document.getElementById("arrayInput").value;
 
-    let arreglo = input.split(",").map(Number); // Convierte la cadena de texto en un arreglo de números
+    let arreglo = input.split(",").map(num=>parseInt(num)); // Convierte la cadena de texto en un arreglo de números
+    // Split se utiliza para separar los números por comas
+
+    if(arreglo.some(isNaN)){
+        alert("Por favor, introduce solo números separados por comas.");
+        return;
+    }
 
     let negativo = 0;
     let positivo = 0;
@@ -94,10 +101,11 @@ function ejercicio3(event){
         }
     }
 
-    document.getElementById("resultadoEj3").innerHTML = `
+    document.getElementById("resultadosEj3").innerHTML = `
         <h3 class="verifyResult">Resultados</h3>
         <p>Números negativos: ${negativo}</p>
         <p>Números positivos: ${positivo}</p>
         <p>Ceros: ${cero}</p>
     `;
 }
+document.getElementById("formEj3").addEventListener("submit", ejercicio3)
