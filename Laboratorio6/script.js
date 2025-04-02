@@ -1,12 +1,16 @@
 // Variable global para que todo el programa pueda hacer uso de esta 'base de datos'
 let saved = ["perro123", "gato456789", "12Hola13"];
 
+log = console.log;
+
 function create(event){
     event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
     
     // Guardar la contraseña creada por el usuario
     let contCreada = document.getElementById("CrearCont").value;
     
+    log("Contraseña creada: " + contCreada); // Log para ver la contraseña creada
+
     // Agregar la contraseña al array
     if(contCreada.length<8){
         alert("La contraseña debe tener al menos 8 caracteres");
@@ -26,6 +30,10 @@ function verificar(event){
     let existe = saved.includes(input);
 
     let resultado = document.getElementById("resultado")//.style.fontStyle = "italic";
+    
+    //Log nos lleva un registro de lo que se está haciendo y si se esta aplicando correctamente
+    log("Contraseña ingresada: " + input); 
+    log("Contraseña guardada: " + saved);
     // Revisar si la contraseña existe
     if(existe){
         alert("La contraseña existe y es correcta");
