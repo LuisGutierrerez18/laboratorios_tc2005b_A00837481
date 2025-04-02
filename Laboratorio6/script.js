@@ -42,5 +42,5 @@ function verificar(event){
     
     document.getElementById("password").value = ""; // Limpiar el input box
 }
-document.getElementById("Crear").addEventListener("submit", crearPassword);
-document.getElementById("Verificar").addEventListener("submit", verificarPassword);
+document.getElementById("Crear").addEventListener("submit", create);
+document.getElementById("Verificar").addEventListener("submit", verificar);
