@@ -31,6 +31,9 @@
 #Preguntas h3{
     text-align: left;
 }
+#Preguntas p{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
 #tablaResultados{
     background-color: rgb(255, 255, 255);
