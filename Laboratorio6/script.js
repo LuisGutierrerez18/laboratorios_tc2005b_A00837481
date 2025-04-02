@@ -1,7 +1,8 @@
-function verificar(event){
-    event.preventDefault();
+// Variable global para que todo el programa pueda hacer uso de esta 'base de datos'
+let saved = ["perro123", "gato456789", "12Hola13"];
 
-    let saved = ["perro123", "gato456789", "12Hola13"];
+function create(event){
+    event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
     
     // Guardar la contraseña creada por el usuario
     let contCreada = document.getElementById("CrearCont").value;
@@ -12,11 +13,14 @@ function verificar(event){
         return;
     }
     saved.push(contCreada);
-    document.getElementById("CrearCont").value = "";
-    
-    // Guardar la contraseña creada por el usuario
-    let input = document.getElementById("password").value;
+    document.getElementById("CrearCont").value = "";//Limpiar el input box
+    alert("Contraseña creada correctamente"); 
+}
 
+function verificar(event){
+    event.preventDefault();
+
+    let input = document.getElementById("password").value; // Obtener la contraseña ingresada por el usuario
 
     // Verificar si la contraseña existe en el array
     let existe = saved.includes(input);
@@ -33,8 +37,10 @@ function verificar(event){
         alert("La contraseña no existe");
         resultado.innerHTML = "La contraseña no existe";
         resultado.style.fontStyle = "italic";
-        resultado.style.color = "green";
+        resultado.style.color = "red";
     }
     
-    document.getElementById("password").value = "";
+    document.getElementById("password").value = ""; // Limpiar el input box
 }
+document.getElementById("Crear").addEventListener("submit", crearPassword);
+document.getElementById("Verificar").addEventListener("submit", verificarPassword);
