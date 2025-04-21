@@ -1,0 +1,20 @@
+{
+  "name": "laboratorios_tc2005b_a00837481",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisGutierrerez18/laboratorios_tc2005b_A00837481.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuisGutierrerez18/laboratorios_tc2005b_A00837481/issues"
+  },
+  "homepage": "https://github.com/LuisGutierrerez18/laboratorios_tc2005b_A00837481#readme",
+  "description": ""
+}
