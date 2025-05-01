@@ -10,21 +10,23 @@ const Precio = require('../models/model_precios.js');
 };*/
 
 exports.getAdd = (request, response, next) => {
-    response.render('add');
+    const precios = Precio.fetchAll();
+    const total = Precio.calcularPrecioTotal();
+    response.render('add', { precios: precios, total: total });
 };
 
 exports.postAdd = (request, response, next) => {
-    const precio = new Price(request.body.precio);
+    const precio = new Precio(request.body.valor); //! Check Precio
     precio.save();
+    const precios = Precio.fetchAll();
+    const total = Precio.calcularPrecioTotal();
     response.redirect('/add');
 }
 
 exports.getList = (request, response, next) => {
     const precios = modelo.Precio.fetchAll();
     const total = modelo.Precio.calcularPrecioTotal();
-    response.render('list', { precios: precios, total: total });
+    response.render('add`', { precios: precios, total: total });
 }
-/*
-const precios = modelo.Precio.fetchAll();
-module.exports = Precio;*/
+
 

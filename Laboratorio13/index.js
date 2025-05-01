@@ -9,6 +9,9 @@ const path = require('path');
 
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 const controlPrecios = require('./controller/controller.js');
 
 app.use(bodyParser.urlencoded({extended:false}));
@@ -16,14 +19,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', (request, response, next) => {
-    response.render('landing.ejs')
+    response.render('landingpage.ejs')
 });
 
-app.get('/add', (request, response) => {
+/*app.get('/add', (request, response) => {
     response.render('add.ejs')
-});
+});*/
 
 app.post('/add', controlPrecios.postAdd);
+app.get('/add', controlPrecios.getAdd);
 app.get('/list', controlPrecios.getList);
 
 /*
