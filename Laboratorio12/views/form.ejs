@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>HTML Dinamico</title>
+</head>
+<body>
+    <form method="POST" action="/cuadrado">
+        <input type="number" name="numero" placeholder="Ingresa un numero">
+        </br>
+        <button type="submit">Calcular cuadrado</button>
+    </form>
+
+    <%- include('footer.ejs') %>
+    <%- include('scripts.ejs') %>
+
+</body>

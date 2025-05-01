@@ -1,0 +1,15 @@
+<h1><%= mensaje %></h1>
+<p>Prueba de HTML dinámico con EJS</p>
+
+<div>
+    <% if (frases_a_escribir && frases_a_escribir.length > 0) { %>
+        <h2>Frases a escribir:</h2>
+        <ul>
+            <% for (let i = 0; i < frases_a_escribir.length; i++) { %>
+                <li><%= frases_a_escribir[i] %></li>
+            <% } %>
+        </ul>
+    <% } else { %>
+        <p>No hay frases</p>
+    <% } %>
+</div>

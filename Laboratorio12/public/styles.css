@@ -1,0 +1,20 @@
+body h1{
+    color : rgb(8, 121, 197);
+    font-size: 30px;
+    text-align: center;
+}
+body h2{
+    color : rgb(8, 121, 197);
+    font-size: 20px;
+    text-align: center;
+}
+body h3{
+    color : rgb(8, 121, 197);
+    font-size: 15px;
+    text-align: center;
+}
+body ul,li{
+    color : rgb(8, 121, 197);
+    font-size: 15px;
+    text-align: center;
+}
