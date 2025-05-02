@@ -1,4 +1,4 @@
-const Precio = require('../models/model_precios.js');
+const Precio = require('../../Laboratorio13/models/model_precios.js');
 
 //exports funciona para exportar funciones
 
