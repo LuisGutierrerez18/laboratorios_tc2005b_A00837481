@@ -23,5 +23,19 @@ app.get('/', (req, res, next) => {
     res.render('landingpage.ejs');
 });
 
+app.get('/form', (req, res) => {
+    res.render('form.ejs');
+});
+
+app.post('/form', (req, res) => {
+    const nombre = req.body.nombre;
+    res.cookie('nombre', nombre);
+    res.redirect('/saluda_usuario');
+});
+
+app.get('/saluda_usuario', (req, res) => {
+    const nombre = req.cookies.nombre;
+    res.render('saluda_usuario.ejs', { nombre: nombre });
+});
 
 app.listen(3000);
