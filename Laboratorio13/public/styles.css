@@ -19,3 +19,7 @@ a button{
     padding : 10px;
     align-items: center;
 }
+li{
+    color: rgb(243, 245, 247);
+    text-align: center;
+}
