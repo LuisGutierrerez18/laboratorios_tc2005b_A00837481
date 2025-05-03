@@ -1,6 +1,5 @@
-const Producto = require('../models/producto');
 const mariadb = require('mariadb');
-const pool = require('../index.js').pool;
+const pool = require('../db.js').pool;
 
 module.exports = class Productos{
     constructor(nombre,precio) {
