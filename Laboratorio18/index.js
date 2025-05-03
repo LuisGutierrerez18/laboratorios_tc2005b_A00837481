@@ -6,10 +6,18 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+const usuariosRoutes = require('./routes/usuarios.routes.js');
+
 const fs = require('fs');
 const path = require('path');
 
 const app = express();
+
+// Middleware de proteccion de ruteo
+const isAuth = require('./is-auth.js');
+const csrf = require('csurf');
+const csrfProtection = csrf();
+
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -18,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use('/usuarios', usuariosRoutes);
 
 app.get('/', (req, res, next) => {
     res.render('landingpage.ejs');
