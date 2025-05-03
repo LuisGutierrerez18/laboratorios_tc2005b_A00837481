@@ -6,10 +6,11 @@
     <title>Fromulario</title>
 </head>
 <body>
-    <h1>Bienvenido Ingresa tu Nombre</h1>
-    <form action="/usuarios/login" method="POST">
+    <h1>Bienvenido Ingresa tu Username y Password</h1>
+    </h1>
+    <form action="/form" method="POST">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="text" name="nombre" placeholder="Username">
         </br>
         <input type="password" name="password" placeholder="Password">
         </br>

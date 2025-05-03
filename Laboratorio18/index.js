@@ -38,7 +38,7 @@ app.use(csrfProtection);
 
 //middleware para vistas
 app.use((req, res, next) => {
-    res.locals.isLoggedIn = req.session.isLoggedIn;
+   //res.locals.isLoggedIn = req.session.isLoggedIn;
     res.locals.csrfToken = req.csrfToken();
     next();
 });
@@ -48,7 +48,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/form', (req, res) => {
-    res.render('form.ejs');
+    res.render('form.ejs',{ csrfToken: req.csrfToken() });
 });
 
 app.post('/form', (req, res) => {

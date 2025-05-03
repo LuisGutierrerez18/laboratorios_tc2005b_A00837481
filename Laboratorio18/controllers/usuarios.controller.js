@@ -2,15 +2,15 @@ const model = require("../models/usuarios.model.js")
 const bcrypt = require("bcryptjs");
 
 module.exports.render_login = (req,res) =>{
-    res.render("/form");
-}
+    res.render("form",{csrfToken: req.csrfToken()});
+};
 
 module.exports.do_login = async(req,res) =>{
     try {
         const usuarios = await model.User.findUser(req.body.username)
 
         if(usuarios.length < 1){
-            res.render("usuarios/registro",{
+            res.render("/form",{
                 registro: false
             });
             return;
@@ -20,7 +20,7 @@ module.exports.do_login = async(req,res) =>{
         const doMatch = await bcrypt.compare(req.body.password, usuario.password);
 
         if(!doMatch) {
-            res.render("usuarios/registro",{
+            res.render("/form",{
                 registro: false
             });
             return;
@@ -39,7 +39,7 @@ module.exports.do_login = async(req,res) =>{
     }        
 }
 module.exports.get_registro = async(req,res) =>{
-    res.render("usuarios/registro", {registro:true});
+    res.render("form", {registro:true});
 }
 
 module.exports.post_reguistro = async(req,res) =>{
