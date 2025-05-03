@@ -14,7 +14,7 @@ const path = require('path');
 const app = express();
 
 // Middleware de proteccion de ruteo
-const isAuth = require('./is-auth.js');
+const isAuth = require('./utils/is-auth.js');
 const csrf = require('csurf');
 const csrfProtection = csrf();
 
@@ -28,6 +28,21 @@ app.use(cookieParser());
 
 app.use('/usuarios', usuariosRoutes);
 
+// Inicializar la sesion
+app.use(session({
+    secret: 'tc2005b',
+    resave: false,
+    saveUninitialized: false,
+}));
+app.use(csrfProtection);
+
+//middleware para vistas
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.session.isLoggedIn;
+    res.locals.csrfToken = req.csrfToken();
+    next();
+});
+
 app.get('/', (req, res, next) => {
     res.render('landingpage.ejs');
 });
@@ -38,8 +53,17 @@ app.get('/form', (req, res) => {
 
 app.post('/form', (req, res) => {
     const nombre = req.body.nombre;
-    res.cookie('nombre', nombre);
-    res.redirect('/saluda_usuario');
+    const password = req.body.password;
+    //let user = [];
+
+    // Encripta la contrseña 
+    bcrypt.hash(password,12)
+        .then(hashedPassword => {
+            users.push({ nombre, password: hashedPassword });
+            fs.writeFileSync(usersFilePath, JSON.stringify(users));
+        res.cookie('nombre', nombre);
+        res.redirect('/saluda_usuario');
+    })
 });
 
 app.get('/saluda_usuario', (req, res) => {

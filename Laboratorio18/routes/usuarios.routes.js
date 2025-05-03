@@ -3,8 +3,7 @@ const router = express.Router();
 const controller = require("../controllers/usuarios.controller.js");
 
 //Seguridad de ruteo
-const isAuth = require("../utils/is-auth");
-const isAuth = require('../is-auth.js');
+const isAuth = require('../utils/is-auth.js');
 
 
 
