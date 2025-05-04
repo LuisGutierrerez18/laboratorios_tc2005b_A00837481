@@ -8,7 +8,105 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div ></div>
+
+<div class="alert alert-warning" role="alert">
+    Bienvenido a la página de Bootstrap
+</div>
+
+<div class="container">
+    <div class="jumbotron">
+      <h1>Laboratorio 5</h1>
+      <p>En este lab se implementa elementos de bootstrap.</p>
+    </div>
+    <p>Luis Gutierrez</p>
+    <p>Matricula: A00837481</p>
+  </div>
+
+<div class="row">
+    <!-- Tarjeta 1 -->
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Pregunta 1</h5>
+          <p class="card-text">¿Qué es Material Design?</p>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalMaterial">
+            Respuesta
+          </button>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Tarjeta 2 -->
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Pregunta 2</h5>
+          <p class="card-text">¿Cuál es la diferencia entre Internet y la World Wide Web?</p>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalWeb">
+            Respuesta
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Tarjeta 3-->
+<div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Pregunta 3</h5>
+        <p class="card-text">¿Cuáles son las partes de un URL?</p>
+        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal3">
+          Respuesta
+        </button>
+      </div>
+    </div>
+  </div>
+  
+
+<!-- Modal 1 -->
+<div class="modal fade" id="modalMaterial" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+      <div class="modal-body">
+        Material Design es un sistema de diseño creado por Google para construir interfaces limpias, modernas y coherentes.
+      </div>
+      <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="modalWeb" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+      <div class="modal-body">
+        <strong>Internet</strong> es la red de infraestructura que conecta computadoras en el mundo.  
+        <br><strong>La Web</strong> es un servicio dentro de Internet que permite navegar sitios usando navegadores.
+      </div>
+      <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3 -->
+<div class="modal fade" id="modal3" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content p-3">
+        <div class="modal-body">
+            Se comopone por los siguiente:<br></br>
+        http o https --> se refiere a una web con protocolos de seguridad<br></br>
+        www. es acronimo de world wide web 
+        el dominio que es la direccion que distingue una pagina con otra ejemplo:
+        tec.mx o facebook.com. 
+        </div>
+        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+  
 
 
 </body>
