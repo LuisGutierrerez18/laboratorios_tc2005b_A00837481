@@ -10,7 +10,7 @@ module.exports.do_login = async(req,res) =>{
         const usuarios = await model.User.findUser(req.body.username)
 
         if(usuarios.length < 1){
-            res.render("/form",{
+            res.redirect("/form",{
                 registro: false
             });
             return;
@@ -20,10 +20,7 @@ module.exports.do_login = async(req,res) =>{
         const doMatch = await bcrypt.compare(req.body.password, usuario.password);
 
         if(!doMatch) {
-            res.render("/form",{
-                registro: false
-            });
-            return;
+            return res.redirect("/form");
         }
 
         req.session.username = usuario.username;
@@ -33,7 +30,7 @@ module.exports.do_login = async(req,res) =>{
         });
 
     }catch (error){
-        res.render("usuarios/registro",{
+        res.redirect("usuarios/registro",{
             registro: false
         });
     }        

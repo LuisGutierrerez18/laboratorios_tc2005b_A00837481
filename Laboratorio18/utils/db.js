@@ -9,4 +9,17 @@ const pool = mariadb.createPool({
     //port: 3306 // Agregarlo por si es necesario
 });
 
-module.exports = {pool};
+module.exports = {
+    query: async (query, params) => {
+        let conn;
+        try {
+            conn = await pool.getConnection();
+            const result = await conn.query(query, params);
+            return result;
+        } catch (err) {
+            throw err;
+        } finally {
+            if (conn) conn.release();
+        }
+    },
+}

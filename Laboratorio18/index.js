@@ -5,8 +5,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-
+// Encriptar contraseñas
+const bcrypt = require('bcryptjs');
 const usuariosRoutes = require('./routes/usuarios.routes.js');
+const model = require('./models/usuarios.model.js');
 
 const fs = require('fs');
 const path = require('path');
@@ -22,6 +24,7 @@ const csrfProtection = csrf();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+const usersFilePath = path.join(__dirname, 'data', 'users.json');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -43,6 +46,11 @@ app.use((req, res, next) => {
     next();
 });
 
+let users = [];
+if(fs.existsSync(usersFilePath)){
+    users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));;
+}
+
 app.get('/', (req, res, next) => {
     res.render('landingpage.ejs');
 });
@@ -51,19 +59,36 @@ app.get('/form', (req, res) => {
     res.render('form.ejs',{ csrfToken: req.csrfToken() });
 });
 
-app.post('/form', (req, res) => {
+app.post('/form', async (req, res) => {
     const nombre = req.body.nombre;
     const password = req.body.password;
-    //let user = [];
 
-    // Encripta la contrseña 
-    bcrypt.hash(password,12)
-        .then(hashedPassword => {
-            users.push({ nombre, password: hashedPassword });
-            fs.writeFileSync(usersFilePath, JSON.stringify(users));
+    try {
+        console.log("Revisando si el usuario existe");
+        const existingUsers = await model.User.findUser(nombre);
+        console.log("Usuario encontrado:", existingUsers);
+
+        if (existingUsers.length > 0) {
+            console.log("El usuario ya existe");
+            return res.redirect('/form');
+        }
+
+        console.log("Hashing password...");
+        const hashedPassword = await bcrypt.hash(password, 12);
+        console.log("Hashed password:", hashedPassword);
+
+        console.log("Creating new user...");
+        const newUser = new model.User(nombre, nombre, hashedPassword);
+        await newUser.save();
+
         res.cookie('nombre', nombre);
         res.redirect('/saluda_usuario');
-    })
+    } catch (error) {
+        console.error("Detalles del error:", error);
+        res.status(500).json({
+            msg: "Error al registrar el usuario"
+        });
+    }
 });
 
 app.get('/saluda_usuario', (req, res) => {
