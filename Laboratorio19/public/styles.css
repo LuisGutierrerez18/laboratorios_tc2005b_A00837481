@@ -1,0 +1,36 @@
+html{
+    background-color: rgb(110, 150, 182);
+}
+h1{
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    text-align: center;
+}
+h2{
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    text-align: center;
+}
+
+p{
+    color: rgb(33, 33, 33);
+    text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
+    font-size: 25px;
+}
+li{
+    color: rgb(33, 33, 33);
+    text-align: center;
+    font-size: 20px;
+}
+#Preguntas{
+    padding-top: 50px;
+}
+
+#login{
+    padding-top: 10px;
+    padding-bottom: 50px;
+    margin-left: 50%;
+    margin-top: 50px;
+}
