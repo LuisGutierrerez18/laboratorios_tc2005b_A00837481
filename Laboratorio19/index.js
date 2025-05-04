@@ -55,23 +55,24 @@ app.get('/', (req, res, next) => {
     res.render('landingpage.ejs');
 });
 
-app.get('/form', (req, res) => {
+app.get('/registro', (req, res) => {
     res.render('form.ejs',{ csrfToken: req.csrfToken() });
 });
 
-app.post('/form', async (req, res) => {
-    const nombre = req.body.nombre;
+app.post('/registro', async (req, res) => {
+    const username = req.body.username;
     const password = req.body.password;
+    const role_id = 2; // Para usuarios normales
 
     try {
         console.log("Password before hashing:", password);
         console.log("Revisando si el usuario existe");
-        const existingUsers = await model.User.findUser(nombre);
+        const existingUsers = await model.User.findUser(username);
         console.log("Usuario encontrado:", existingUsers);
 
         if (existingUsers.length > 0) {
             console.log("El usuario ya existe");
-            return res.redirect('/form');
+            return res.redirect('/registro');
         }
 
         console.log("Hashing password...");
@@ -79,10 +80,10 @@ app.post('/form', async (req, res) => {
         console.log("Hashed password:", hashedPassword);
 
         console.log("Creating new user...");
-        const newUser = new model.User(nombre, nombre, hashedPassword);
+        const newUser = new model.User(username, username, hashedPassword, role_id);
         await newUser.save();
 
-        res.cookie('nombre', nombre);
+        res.cookie('nombre', username);
         res.redirect('/saluda_usuario');
     } catch (error) {
         console.error("Detalles del error:", error);
@@ -111,7 +112,7 @@ app.post('/login', async (req, res) => {
     try {
         console.log("Revisando si el usuario existe...");
         const existingUsers = await model.User.findUser(nombre);
-
+        console.log("Usuario encontrado:", existingUsers);
         if (existingUsers.length === 0) {
             console.log("El usuario no existe");
             return res.render('usuarios/login.ejs', {
@@ -134,8 +135,33 @@ app.post('/login', async (req, res) => {
 
         console.log("Contraseña correcta");
         req.session.isLoggedIn = true;
-        res.cookie('nombre', nombre);
-        res.redirect('/saluda_usuario');
+        req.session.role = user.role; // Asignar un rol por defecto si no existe
+        req.session.username = user.username;
+        req.session.privileges = existingUsers.map((u) => u.privilege)|| [];
+        
+        console.log("Rol del usuario: ", req.session.role);
+        console.log("Privilegios del usuario:", req.session.privileges);
+
+        if(req.session.role === "admin") {
+            console.log("Usuario es admin --> redirigiendo a admin_view");
+            return res.render("usuarios/admin_view.ejs", {
+                usuario: user,
+                role: req.session.role,
+                privileges: req.session.privileges,
+            });
+        }else if(req.session.role === "cliente") {
+            console.log("Usuario no es admin --> redirigiendo a user_view");
+            return res.render("usuarios/user_view.ejs", {
+                usuario: user,
+                role: req.session.role,
+                privileges: req.session.privileges,
+            });
+        }else {
+            console.log("Rol no reconocido");
+            return res.setatus(403).send("Acceso denegado");
+        }
+        //res.cookie('nombre', nombre);
+        //res.redirect('/saluda_usuario');
     } catch (error) {
         console.error("Detalles del error:", error);
         res.status(500).json({

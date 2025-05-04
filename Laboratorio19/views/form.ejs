@@ -8,13 +8,13 @@
 <body>
     <h1>Bienvenido Ingresa tu Username y Password</h1>
     </h1>
-    <form action="/form" method="POST">
+    <form action="/registro" method="POST">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <input type="text" name="nombre" placeholder="Username">
+        <input type="text" name="username" placeholder="Username">
         </br>
         <input type="password" name="password" placeholder="Password">
         </br>
-        <input type="submit">
+        <input type="submit", value="Register">
     </form>
 
 </body>

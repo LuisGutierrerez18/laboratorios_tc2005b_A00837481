@@ -17,10 +17,11 @@ exports.User = class {
 
     async save() {
         try {
-            const result = await db.query(
-                `INSERT INTO users (username, name, password) VALUES (?, ?, ?)`,
-                [this.username, this.name, this.password]
-            );
+            const query = 
+                `INSERT INTO users (username, name, password) 
+                VALUES (?, ?, ?)`;
+            const values = [this.username, this.name, this.password];
+            const result = await db.query(query, values); 
             return result;
         } catch (error) {
             throw error; 
@@ -30,7 +31,13 @@ exports.User = class {
     static async findUser(username) {
         try {
             const result = await db.query(
-                'SELECT * FROM users WHERE username = ?',
+                `SELECT u.*, r.name AS role, p.accion AS privilege
+                 FROM users u
+                 JOIN tiene t ON u.id = t.id_usuario
+                 JOIN roles r ON t.id_rol = r.id_rol
+                 JOIN posee po ON r.id_rol = po.id_rol
+                 JOIN privilegios p ON po.id_privilegio = p.id_privilegio
+                 WHERE u.username = ?;`,
                 [username]
             );
             return result;

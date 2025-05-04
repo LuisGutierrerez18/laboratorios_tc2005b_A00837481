@@ -14,7 +14,7 @@ router.get('/login', controller.render_login);
 router.post('/login', controller.do_login);
 
 router.get('/registro', controller.get_registro);
-router.post('/registro', controller.post_reguistro);
+router.post('/registro', controller.post_registro);
 
 router.get('/protegido', isAuth, (req, res) => {
     res.status(200).json({code: 200, msg:"Ok"});
