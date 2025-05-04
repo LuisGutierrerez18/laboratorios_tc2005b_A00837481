@@ -64,6 +64,7 @@ app.post('/form', async (req, res) => {
     const password = req.body.password;
 
     try {
+        console.log("Password before hashing:", password);
         console.log("Revisando si el usuario existe");
         const existingUsers = await model.User.findUser(nombre);
         console.log("Usuario encontrado:", existingUsers);
@@ -93,7 +94,54 @@ app.post('/form', async (req, res) => {
 
 app.get('/saluda_usuario', (req, res) => {
     const nombre = req.cookies.nombre;
-    res.render('saluda_usuario.ejs', { nombre: nombre });
+    res.render('saluda_usuario.ejs', { errorMessage: null, nombre: nombre });
+});
+
+app.get('/login', (req, res) => {
+    res.render('usuarios/login.ejs', { 
+        errorMessage: null, 
+        csrfToken: req.csrfToken()
+    });
+});
+
+app.post('/login', async (req, res) => {
+    const nombre = req.body.username;
+    const password = req.body.password;
+
+    try {
+        console.log("Revisando si el usuario existe...");
+        const existingUsers = await model.User.findUser(nombre);
+
+        if (existingUsers.length === 0) {
+            console.log("El usuario no existe");
+            return res.render('usuarios/login.ejs', {
+                errorMessage: 'El usuario no existe',
+                csrfToken: req.csrfToken()
+            });
+        }
+
+        const user = existingUsers[0];
+        console.log("Usuario encontrado:", user);
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            console.log("Contraseña incorrecta");
+            return res.render('usuarios/login.ejs', {
+                errorMessage: 'Contraseña incorrecta',
+                csrfToken: req.csrfToken()
+            });
+        }
+
+        console.log("Contraseña correcta");
+        req.session.isLoggedIn = true;
+        res.cookie('nombre', nombre);
+        res.redirect('/saluda_usuario');
+    } catch (error) {
+        console.error("Detalles del error:", error);
+        res.status(500).json({
+            msg: "Error al iniciar sesión"
+        });
+    }
 });
 
 app.listen(3000);
